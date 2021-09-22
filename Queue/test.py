@@ -1,53 +1,89 @@
-from Queue import LinkedQueue
-from queueFromStack import QueueFromStack
+from linked_queue import LinkedQueue
+from queue_from_stacks import QueueFromStack
 
-if __name__ == '__main__':
 
-    myQueue = LinkedQueue[int]()
+
+
+def test(queue):
+
     passed = True
 
-    print("TESTING QUEUE\n\n")
-
     print("Testing enqueue() and dequeue()...")
+
     for i in range(1, 11):
-        myQueue.enqueue(i)
+        queue.enqueue(i)
+
+
     for i in range(1, 6):
-        received = myQueue.dequeue()
+
+        received = queue.dequeue()
+
         if received != i:
             passed = False
             print("Should receive ", i, " instead of ", received)
+
+
     if passed:
         print("\tPASSED\n")
+
 
     print("Testing get_size()...")
     passed = True
-    size = myQueue.get_size()
+    size = queue.get_size()
+
     if size != 5:
         passed = False
         print("The size should be 5 instead of ", size)
+
     if passed:
         print("\tPASSED\n")
+
 
     print("Testing get_front()...")
     passed = True
+
     for i in range(6, 9):
-        received = myQueue.get_front()
+
+        received = queue.get_front()
+
         if (received != i):
             passed = False
             print("The received result should be ", i, " instead of ", received)
-        myQueue.dequeue()
+
+        queue.dequeue()
+
+
     if passed:
         print("\tPASSED\n")
 
+
     print("Testing clear()...")
     passed = True
-    myQueue.clear()
-    if myQueue.get_size() != 0:
+    queue.clear()
+
+    if queue.get_size() != 0:
         passed = False
         print("The size should be now zero!!!")
+        
     if passed:
         print("\tPASSED\n")
     
+
+
+
+
+
+
+if __name__ == '__main__':
+
+    queue = LinkedQueue[int]()
+
+    print("\n\nTESTING LINKED QUEUE\n\n")
+    test(queue)
+
+    print("\n\nTESTING QUEUE FROM STACKS\n\n")
+    test(queue)
+
 
 
 
