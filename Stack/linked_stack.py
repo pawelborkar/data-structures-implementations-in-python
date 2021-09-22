@@ -29,7 +29,7 @@ class LinkedStack(Generic[T]):
 
     # add new node
     # time complexity: O(1)
-    def push(self, item) -> None:
+    def push(self, item: T) -> None:
 
         self.size += 1
         self.initialized = True
@@ -86,9 +86,9 @@ class LinkedStack(Generic[T]):
 
 #######################
 ######### NODE ########
-class Node:
+class Node(Generic[T]):
 
-    def __init__(self, value: T):
+    def __init__(self, value: T) -> None:
         self.value = value
         self.next = None
 

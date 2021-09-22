@@ -16,7 +16,7 @@ class ArrayStack(Generic[T]):
 
     # add new item on top of the stack
     # time complexity: O(1)
-    def push(self, value) -> None:
+    def push(self, value: T) -> None:
         self.initialized = True
         self.arr.append(value)
 
