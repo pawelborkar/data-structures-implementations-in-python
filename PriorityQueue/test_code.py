@@ -1,8 +1,11 @@
 from typing import Deque
-from priority_queue import PriorityQueue, LinkedPriorityQueue
+from linked_priority_queue import LinkedPriorityQueue
+from heap_priority_queue import HeapPriorityQueue
 
-def main():
-    priority_queue = LinkedPriorityQueue()
+
+
+def test(priority_queue):
+
     vals = [4, 5, 6, 7, 2, 1]
     prio = [0, 1, 2, 3, 4, 5] 
 
@@ -55,6 +58,22 @@ def main():
     # output should be 1 2 3 4 5 6
     while not priority_queue.is_empty():
         print(priority_queue.dequeue(), end=' ')
+
+
+
+
+def main():
+
+    print("\n\nTESTING LINKED PRIORITY QUEUE\n\n")
+    priority_queue = LinkedPriorityQueue()
+    test(priority_queue)
+
+    print("\n\n\n\nTESTING HEAP PRIORITY QUEUE\n\n")
+    priority_queue = HeapPriorityQueue()
+    test(priority_queue)
+
+    print('\n\n\nEnd\n\n')
+
 
 
 if __name__ == "__main__":
