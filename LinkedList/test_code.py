@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from linked_list import LinkedList
 
 if __name__ == '__main__':
     print("TESTING LINKED LIST")
@@ -9,10 +9,10 @@ if __name__ == '__main__':
         llist.add(i)  # list should be 1, 2, 3, 4, 5, 6
 
     passed = True
-    print("\nTesting get_size()...")
-    if llist.get_size() != 5:
+    print("\nTesting size...")
+    if llist.count != 5 or len(llist) != 5:
         passed = False
-        print("Size should be 5 instead of ", llist.get_size())
+        print("Size should be 5 instead of ", len(llist))
     if passed:
         print("\tPASSED")
 
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     llist.reverse()
     for i in range(1, 6):
         removed = llist.remove()
-        if (removed != (6 - i)):
+        if removed != (6 - i):
             print("The removed value should be ", (6 - i), "instead of ", removed)
             passed = False
     if passed:
@@ -61,7 +61,7 @@ if __name__ == '__main__':
         test_arr.remove(j)
     test_arr.remove(10)
     llist.remove_value(10)
-    llist_arr = llist.to_array()
+    llist_arr = llist.to_list()
     for i in range(len(test_arr)):
         if test_arr[i] != llist_arr[i]:
             passed = False
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     llist.add(3)
     llist.add(2)
     llist.remove_all_elements_with_value(2)
-    llist_arr = llist.to_array()
+    llist_arr = llist.to_list()
     test_arr = [1, 3]
     for i in range(len(test_arr)):
         if llist_arr[i] != test_arr[i]:
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     for i in range(10):
         llist.add(1)
     llist.remove_all_elements_with_value(1)
-    if llist.to_array() != []:
+    if llist.to_list():
         passed = False
     if passed:
         print("\tPASSED")

@@ -29,7 +29,7 @@ def test(queue):
 
     print("Testing get_size()...")
     passed = True
-    size = queue.get_size()
+    size = len(queue)
 
     if size != 5:
         passed = False
@@ -61,7 +61,7 @@ def test(queue):
     passed = True
     queue.clear()
 
-    if queue.get_size() != 0:
+    if queue:
         passed = False
         print("The size should be now zero!!!")
         

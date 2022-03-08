@@ -20,7 +20,7 @@ class LinkedPriorityQueue(Generic[T, P]):
         new_node = PriorityNode(val, priority)
 
         if self.is_empty():
-            self.head = new_node
+            self._head = new_node
             self.tail = new_node
 
         else:
@@ -29,12 +29,12 @@ class LinkedPriorityQueue(Generic[T, P]):
                 self.tail.set_next(new_node)
                 self.tail = new_node
 
-            elif priority <= self.head.get_priority():
-                new_node.set_next(self.head)
-                self.head = new_node
+            elif priority <= self._head.get_priority():
+                new_node.set_next(self._head)
+                self._head = new_node
 
             else:
-                current = self.head
+                current = self._head
                 while current.get_next() is not None and current.get_next().get_priority() < priority:
                     current = current.get_next()
 
@@ -42,7 +42,7 @@ class LinkedPriorityQueue(Generic[T, P]):
                 current.set_next(new_node)
                 new_node.set_next(temp)
 
-        self.size += 1
+        self._size += 1
 
 
 
@@ -55,11 +55,11 @@ class LinkedPriorityQueue(Generic[T, P]):
             raise Exception('Attempted to dequeue an empty queue!!!')
 
         temp = self.peek()
-        self.head = self.head.get_next()
-        self.size -= 1
+        self._head = self._head.get_next()
+        self._size -= 1
 
         # if the new head is None, then the queue is empty
-        if self.head is None:
+        if self._head is None:
             self.reset() 
 
         return temp
@@ -74,29 +74,29 @@ class LinkedPriorityQueue(Generic[T, P]):
         if self.is_empty():
             raise Exception('Attempted to peek an empty queue!!!')
 
-        return self.head.get_value()
+        return self._head.value()
 
 
 
 
     # get the size of the queue
     def get_size(self) -> int:
-        return self.size
+        return self._size
 
 
 
 
     # check if the queue is empty
     def is_empty(self) -> bool:
-        return self.size == 0
+        return self._size == 0
 
 
 
 
     def reset(self) -> None:
-        self.head = None
+        self._head = None
         self.tail = None
-        self.size = 0
+        self._size = 0
 
 
 
@@ -106,13 +106,13 @@ class LinkedPriorityQueue(Generic[T, P]):
 class PriorityNode(Generic[T, P]):
 
     def __init__(self, value: T, priority: P, next:'PriorityNode'=None) -> None:
-        self.value = value
+        self._value = value
         self.priority = priority
-        self.next = next
+        self._next = next
 
 
-    def get_value(self) -> T:
-        return self.value
+    def value(self) -> T:
+        return self._value
 
 
     def get_priority(self) -> int:
@@ -120,8 +120,8 @@ class PriorityNode(Generic[T, P]):
 
 
     def get_next(self):
-        return self.next
+        return self._next
 
 
     def set_next(self, next):
-        self.next = next
+        self._next = next

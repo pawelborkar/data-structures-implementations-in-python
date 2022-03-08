@@ -21,7 +21,7 @@ def main():
     for i in range(1, 11):
         multiset.remove(i, 1)
 
-    print(multiset.is_empty())
+    print(multiset.empty)
 
 
 

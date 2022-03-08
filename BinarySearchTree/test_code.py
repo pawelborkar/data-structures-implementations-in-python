@@ -1,14 +1,13 @@
 from binary_search_tree import BinarySearchTree
+from typing import Optional
 
 
-
-
-def print_tree_information(bst: 'BinarySearchTree'):
+def print_tree_information(bst: Optional[BinarySearchTree]):
 
     print()
 
-    print('Tree height:', bst.get_height())
-    print('Tree size:', bst.get_size())
+    print('Tree height:', bst.height)
+    print('Tree size:', len(bst))
 
     print('\nLevel Order Traversal:')
     print(bst.level_order_traversal())
@@ -22,8 +21,6 @@ def print_tree_information(bst: 'BinarySearchTree'):
     print('\nPostorder Traversal:')
     print(bst.postorder_traversal())
     
-
-
 
 
 def main():
@@ -41,8 +38,7 @@ def main():
     print(bst.height)
 
     print_tree_information(bst)
-    
-    
+
     print('\n\n***** After removing 4, 7, 8, and 5...\n')
 
     bst.delete(4)
@@ -51,9 +47,6 @@ def main():
     bst.delete(5)
 
     print_tree_information(bst)
-    
-
-
 
     bst.clear()
 
@@ -67,15 +60,12 @@ def main():
 
     print_tree_information(bst)
 
-
     print('\n\n***** After removing 7, and 8...\n')
     
     bst.delete(7)
     bst.delete(8)
 
     print_tree_information(bst)
-
-
 
 
 

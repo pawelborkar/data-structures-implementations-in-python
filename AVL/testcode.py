@@ -1,4 +1,4 @@
-from AVL import *
+from AVL import AVL
 
 def main():
     pass
