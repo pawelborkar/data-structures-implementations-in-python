@@ -1,83 +1,64 @@
+from typing import Any
+
 class Stack:
 
     def __init__(self) -> None:
-        self.arr = []
-        
+        self.arr = list()
 
-
-    def push(self, val):
+    def push(self, val) -> None:
         self.arr.append(val)
-        
 
-
-    def pop(self):
-
-        if self.get_size() == 0:
+    def pop(self) -> Any:
+        if self.size == 0:
             raise Exception('empty stack')
-
         return self.arr.pop()
+
+    def peek(self) -> Any:
+        return self.arr[-1]
     
-
-
-    def peek(self):
-        return self.arr[self.get_size() - 1]
-    
-
-
-    def get_size(self):
+    def clear(self) -> None:
+        self.arr = list()
+        
+    @property
+    def size(self) -> int:
         return len(self.arr)
-    
-    
-
-    def clear(self):
-        self.arr = []
 
         
-
-
 class QueueFromStack:
 
     def __init__(self) -> None:
         self.in_stack = Stack()
         self.out_stack = Stack()
-        
 
-
-    def enqueue(self, val):
+    def enqueue(self, val) -> None:
         self.in_stack.push(val)
         
-
-
-    def dequeue(self):
-
-        if self.out_stack.get_size() == 0:
-
-            for _ in range(self.in_stack.get_size()):
-
+    def dequeue(self) -> Any:
+        if self.size == 0:
+            raise Exception("Empty Queue")
+        if self.out_stack.size == 0:
+            for _ in range(self.in_stack.size):
                 self.out_stack.push(self.in_stack.pop())
-
         return self.out_stack.pop()
     
-
-
-    def get_front(self):
-
-        if self.out_stack.get_size() == 0:
-
-            for _ in range(self.in_stack.get_size()):
-
+    def peek(self) -> Any:
+        if self.size == 0:
+            raise Exception("Empty Queue")
+        if self.out_stack.size == 0:
+            for _ in range(self.in_stack.size):
                 self.out_stack.push(self.in_stack.pop())
-
         return self.out_stack.peek()
-    
 
-
-    def get_size(self):
-        return self.in_stack.get_size() + self.out_stack.get_size()
-
-
-
-    def clear(self):
+    def clear(self) -> None:
         self.in_stack.clear()
         self.out_stack.clear()
+
+    @property
+    def size(self) -> int:
+        return self.in_stack.size + self.out_stack.size
     
+    def __len__(self) -> int:
+        return self.size
+    
+    def __bool__(self) -> int:
+        return self.size != 0

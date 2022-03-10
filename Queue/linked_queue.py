@@ -1,5 +1,5 @@
 from queue import Empty
-from typing import Generic, TypeVar
+from typing import Generic, TypeVar, Optional
 
 T = TypeVar('T')
 
@@ -13,36 +13,37 @@ class LinkedQueue(Generic[T]):
     def enqueue(self, value) -> None:
         new_node = Node[T](value)
 
-        if self.is_empty:
+        if self.empty:
             self._head = new_node
+            self._tail = new_node
             self._initialized = True
         else:
-            self.tail.set_next(new_node)
+            self._tail.next = new_node
 
-        self.tail = new_node
+        self._tail = new_node
         self._size += 1
 
 
-    def get_front(self) -> T:
-        if not self.is_initialized or self.is_empty:
+    def peek(self) -> T:
+        if not self.initialized or self.empty:
             raise EmptyQueueException()
 
-        result = self._head.value()
+        result = self._head.value
         return result
 
 
     def dequeue(self) -> T:
-        if not self.is_initialized or self.is_empty:
+        if not self.initialized or self.empty:
             raise EmptyQueueException()
 
-        temp = self.get_front()
-        self._head = self._head.get_next()
+        item = self.peek()
+        self._head = self._head.next
 
         if self._head is None:
-            self.tail = None
+            self._tail = None
 
         self._size -= 1
-        return temp
+        return item
     
 
     def clear(self) -> None:
@@ -52,17 +53,17 @@ class LinkedQueue(Generic[T]):
     def _initialize(self) -> None:
         self._initialized = False
         self._head = None
-        self.tail = None
+        self._tail = None
         self._size = 0
         
     
     @property
-    def is_initialized(self) -> None:
+    def initialized(self) -> None:
         return self._initialized
     
     
     @property
-    def is_empty(self) -> bool:
+    def empty(self) -> bool:
         return self._size == 0
     
     
@@ -72,27 +73,47 @@ class LinkedQueue(Generic[T]):
     
     def __len__(self) -> int:
         return self._size
-
+    
+    
+    def __iter__(self):
+        self._current = self._head
+        return self
+    
+    
+    def __next__(self):
+        if self._current is None:
+            raise StopIteration()
+        else:
+            item = self._current.value
+            self._current = self._current.next
+            return item
 
 
 
 class Node(Generic[T]):
 
-    def __init__(self, value: T) -> None:
+    def __init__(self, value: T):
         self._value: T = value
         self._next: Optional[Node] = None
 
-    def value(self) -> T:
+    @property
+    def value(self):
         return self._value
 
-    def get_next(self) -> Optional[Node]:
+    @property
+    def next(self):
         return self._next
+    
+    @value.setter
+    def value(self, value):
+        self.value = value
 
-    def set_next(self, next) -> None:
+    @next.setter
+    def next(self, next):
         self._next = next
         
         
         
 class EmptyQueueException(Exception):
     def __init__(self) -> None:
-        super.__init__("Attempted to retrieve value from an empty queue")
+        super().__init__("Attempted to retrieve value from an empty queue")
