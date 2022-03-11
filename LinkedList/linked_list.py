@@ -3,6 +3,11 @@ from typing import Generic, TypeVar, Optional, List
 T = TypeVar('T')
 
 
+class IndexOutOfRangeException(Exception):
+    def __init__(self) -> None:
+        super().__init__("Index out of range!")
+
+
 class LinkedList(Generic[T]):
 
     def __init__(self) -> None:
@@ -120,8 +125,6 @@ class LinkedList(Generic[T]):
 
 
     def __get_node_at(self, position):
-        if self.empty:
-            raise Exception("Attempted to find in an empty list!!!")
         self.__check_position(position)
         current = self._head
         for i in range(1, position):
@@ -130,16 +133,12 @@ class LinkedList(Generic[T]):
 
 
     def __check_position(self, pos: int) -> None:
-        if pos is None:
-            return
-        if pos <= 0:
-            raise Exception("Position must start from 1")
-        if pos > self._size:
-            raise Exception("Position exceeded the list's size")
+        if pos <= 0 or pos > self._size:
+            raise IndexOutOfRangeException()
         
         
     @property
-    def count(self) -> int:
+    def size(self) -> int:
         return self._size
 
 
@@ -159,6 +158,10 @@ class LinkedList(Generic[T]):
     def __iter__(self):
         self._current = self._head
         return self
+    
+    
+    def __getitem__(self, index):
+        return self.__get_node_at(index).value
     
     
     def __next__(self):

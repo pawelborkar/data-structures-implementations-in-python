@@ -3,6 +3,11 @@ from typing import Generic, TypeVar, Optional
 T = TypeVar('T')
 
 
+class IndexOutOfRangeException(Exception):
+    def __init__(self) -> None:
+        super().__init__("Index our of range!")
+
+
 class Node(Generic[T]):
     def __init__(self, value: T, prev_node=None, next_node=None) -> None:
         self._value: T = value
@@ -50,9 +55,9 @@ class DoublyLinkedList(Generic[T]):
 
 
     def prepend(self, new_value: T) -> None:
-        new_node = Node[T](value=new_value, next=self._head)
+        new_node = Node[T](value=new_value, next_node=self._head)
         if not self.is_empty():
-            self._head.prev = new_node
+            self._head.previous = new_node
         self._head = new_node
         self._size += 1
 
@@ -62,12 +67,12 @@ class DoublyLinkedList(Generic[T]):
             self._head = Node(new_value)
         else:
             tail = self.__get_node_at(self._size)
-            new_node = Node[T](value=new_value, prev=tail)
+            new_node = Node[T](value=new_value, prev_node=tail)
             tail.next = new_node
         self._size += 1
 
 
-    def insert_at(self, new_value: T, position: int) -> None:
+    def insert_at(self, position: int, new_value: T) -> None:
         if position == 1 or self.is_empty():
             self.prepend(new_value)
         elif position == self._size + 1:
@@ -80,6 +85,11 @@ class DoublyLinkedList(Generic[T]):
             node_before.next = new_node
             temp.prev = new_node
             self._size += 1
+            
+            
+    def get(self, position: int) -> T:
+        node = self.__get_node_at(position)
+        return node.value    
 
 
     def remove(self, position=None) -> Optional[Node]:
@@ -169,6 +179,10 @@ class DoublyLinkedList(Generic[T]):
 
     def __bool__(self) -> bool:
         return self.size != 0
+
+
+    def __getitem__(self, i) -> T:
+        return self.get(i)
 
 
     def __iter__(self):
