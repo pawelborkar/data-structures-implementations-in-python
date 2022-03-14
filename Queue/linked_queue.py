@@ -1,4 +1,3 @@
-from queue import Empty
 from typing import Generic, TypeVar, Optional
 
 T = TypeVar('T')
@@ -15,8 +14,6 @@ class LinkedQueue(Generic[T]):
 
         if self.empty:
             self._head = new_node
-            self._tail = new_node
-            self._initialized = True
         else:
             self._tail.next = new_node
 
@@ -25,15 +22,13 @@ class LinkedQueue(Generic[T]):
 
 
     def peek(self) -> T:
-        if not self.initialized or self.empty:
+        if self.empty:
             raise EmptyQueueException()
-
-        result = self._head.value
-        return result
+        return self._head.value
 
 
     def dequeue(self) -> T:
-        if not self.initialized or self.empty:
+        if self.empty:
             raise EmptyQueueException()
 
         item = self.peek()
@@ -51,15 +46,9 @@ class LinkedQueue(Generic[T]):
         
     
     def _initialize(self) -> None:
-        self._initialized = False
         self._head = None
         self._tail = None
         self._size = 0
-        
-    
-    @property
-    def initialized(self) -> None:
-        return self._initialized
     
     
     @property

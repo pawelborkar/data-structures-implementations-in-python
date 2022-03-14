@@ -2,7 +2,7 @@ import pytest
 from linked_queue import LinkedQueue
 
 
-def test_enqueue_dequeue():
+def test_enqueue_dequeue_peek():
     q = LinkedQueue()
     arr = list()
     for i in range(1000):
@@ -10,6 +10,7 @@ def test_enqueue_dequeue():
         arr.append(i)
     assert len(q) == len(arr)
     while q:
+        assert q.peek() == arr[0]
         assert q.dequeue() == arr.pop(0)
         
 
