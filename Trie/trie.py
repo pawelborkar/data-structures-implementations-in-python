@@ -1,13 +1,13 @@
+from typing import Optional
+
+
 class Trie:
 
     def __init__(self) -> None:
         self._root = Node()
 
 
-
     def insert(self, string: str) -> bool:
-        """
-        """
         depth = len(string)
         current = self._root
         changed = False
@@ -22,21 +22,8 @@ class Trie:
         return changed
 
 
-
-    def is_empty(self) -> bool:
-        """
-        """
-        return len(self._root) == 0
-
-        
-
     def delete(self, string: str) -> None:
-        """
-        NOT TESTED YET
-        """
-        def __delete(self, root: Optional[Node], string: str, depth: int) -> Optional[Node]:
-            """
-            """
+        def _delete(root: Optional[Node], string: str, depth: int) -> Optional[Node]:
             if root is None:
                 return None
 
@@ -50,20 +37,17 @@ class Trie:
 
                 return root
 
-            root.children[string[depth]] = __delete(root.children[string[depth]],
+            root.children[string[depth]] = _delete(root.children[string[depth]],
                                                     string, depth + 1)
             if len(root) == 0 and not root.terminal:
                 root = None
 
             return root
 
-        __delete(self._root, string, 0)
-
+        _delete(self._root, string, 0)
 
 
     def contains(self, string: str) -> bool:
-        """
-        """
         depth = len(string)
         current = self._root
 
@@ -73,10 +57,27 @@ class Trie:
             current = current.children[string[i]]
 
         return current.terminal
+    
+    
+    @property
+    def is_empty(self) -> bool:
+        return len(self._root) == 0
 
 
 
-    class Node:
-        def __init__(self) -> None:
-            self.terminal = False
-            self.children = dict()
+class Node:
+    def __init__(self) -> None:
+        self._terminal = False
+        self._children = dict()
+        
+    @property
+    def terminal(self) -> bool:
+        return self._terminal
+    
+    @terminal.setter
+    def terminal(self, terminal) -> None:
+        self._terminal = terminal
+        
+    @property
+    def children(self) -> dict:
+        return self._children
