@@ -1,4 +1,5 @@
-# Data-Structures-in-Python
+# Data Structures in Python ![icons8-python](https://user-images.githubusercontent.com/83048295/159117384-14a09c92-1af1-4546-beb8-7a8e9ae8c420.svg)
+
 Data Structures implementations from scratch in Python
 
 ### All Data Structures Covered So Far
