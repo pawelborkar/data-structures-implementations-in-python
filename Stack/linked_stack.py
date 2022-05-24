@@ -1,4 +1,5 @@
 from typing import TypeVar, Generic, Optional
+from __future__ import annotations
 
 T = TypeVar('T')
 
@@ -30,7 +31,7 @@ class LinkedStack(Generic[T]):
 
         return top_value
 
-    def clear(self):
+    def clear(self) -> None:
         self._initialize()
 
     def _initialize(self) -> None:
@@ -68,13 +69,13 @@ class Node(Generic[T]):
         return self._value
 
     @property
-    def next(self) -> Optional[Optional[Node]]:
+    def next(self) -> Optional[Node]:
         return self._next
 
     @value.setter
-    def value(self, value) -> None:
+    def value(self, value: T) -> None:
         self._value = value
 
     @next.setter
-    def next(self, next_node) -> None:
+    def next(self, next_node: Optional[Node]) -> None:
         self._next = next_node

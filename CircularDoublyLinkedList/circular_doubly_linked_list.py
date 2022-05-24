@@ -1,7 +1,7 @@
 from typing import Generic, TypeVar, Optional
+from __future__ import annotations
 
 T = TypeVar('T')
-
 
 
 class Node(Generic[T]):
@@ -11,27 +11,27 @@ class Node(Generic[T]):
         self._next = next_node
 
     @property
-    def value(self):
+    def value(self) -> T:
         return self._value
 
     @property
-    def next(self):
+    def next(self) -> Optional[Node]:
         return self._next
 
     @property
-    def previous(self):
+    def previous(self) -> Optional[Node]:
         return self._prev
 
     @value.setter
-    def value(self, value):
+    def value(self, value: T) -> None:
         self._value = value
 
     @next.setter
-    def next(self, next_node):
+    def next(self, next_node: Optional[Node]) -> None:
         self._next = next_node
 
     @previous.setter
-    def previous(self, prev_node):
+    def previous(self, prev_node: Optional[Node]) -> None:
         self._prev = prev_node
 
 

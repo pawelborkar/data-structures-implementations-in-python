@@ -1,5 +1,6 @@
 """ NOT YET TESTED """
 from typing import Generic, TypeVar, Optional, List
+from __future__ import annotations
 
 T = TypeVar('T')
 
@@ -11,29 +12,29 @@ class IndexOutOfRangeException(Exception):
         
 class EmptyListException(Exception):
     def __init__(self) -> None:
-        super().__init__("Attempted to remove or retreive data from an empty list!")
+        super().__init__("Attempted to remove or retrieve data from an empty list!")
 
 
 class Node(Generic[T]):
 
-    def __init__(self, data=None, link=None):
+    def __init__(self, data=None, link=None) -> None:
         self._data = data
         self._link = link
 
     @property
-    def data(self):
+    def data(self) -> T:
         return self._data
 
     @property
-    def link(self):
+    def link(self) -> Optional[Node]:
         return self._link
 
     @data.setter
-    def data(self, data):
+    def data(self, data: T) -> None:
         self._data = data
 
     @link.setter
-    def link(self, link):
+    def link(self, link: Optional[Node]) -> None:
         self._link = link
 
 
@@ -168,7 +169,7 @@ class LinkedList(Generic[T]):
 
 
     def remove(self, value: T) -> bool:
-        """remove the first occurence of the element with the given value
+        """remove the first occurrence of the element with the given value
         Args:
             value (T): the value to be removed from the list
         Returns:
@@ -197,11 +198,11 @@ class LinkedList(Generic[T]):
 
 
     def locate(self, value: T) -> int:
-        """return the index of the first occurence with the given value
+        """return the index of the first occurrence with the given value
         Args:
             value (T): the value to look for
         Returns:
-            int: the index of the first occurence (return -1 if not found)
+            int: the index of the first occurrence (return -1 if not found)
         """
         current = self._head
         index = 0

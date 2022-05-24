@@ -1,12 +1,9 @@
 from typing import TypeVar, Generic
 import heapq
-
-
-T = TypeVar('T')
-
+from priority_queue import PriorityQueue, T
 
 # CAN'T USE ON OBJECT
-class HeapPriorityQueue(Generic[T]):
+class HeapPriorityQueue(PriorityQueue):
 
     def __init__(self) -> None:
         self.reset()

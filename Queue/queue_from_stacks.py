@@ -1,34 +1,13 @@
 from typing import Any
-
-class Stack:
-
-    def __init__(self) -> None:
-        self.arr = list()
-
-    def push(self, val) -> None:
-        self.arr.append(val)
-
-    def pop(self) -> Any:
-        if self.size == 0:
-            raise Exception('empty stack')
-        return self.arr.pop()
-
-    def peek(self) -> Any:
-        return self.arr[-1]
-    
-    def clear(self) -> None:
-        self.arr = list()
-        
-    @property
-    def size(self) -> int:
-        return len(self.arr)
+from queue_interface import QueueInterface
+from Stack.linked_stack import LinkedStack
 
         
-class QueueFromStack:
+class QueueFromStack(QueueInterface):
 
     def __init__(self) -> None:
-        self.in_stack = Stack()
-        self.out_stack = Stack()
+        self.in_stack = LinkedStack()
+        self.out_stack = LinkedStack()
 
     def enqueue(self, val) -> None:
         self.in_stack.push(val)

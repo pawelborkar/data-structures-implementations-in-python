@@ -1,6 +1,7 @@
 import pytest
 from linked_priority_queue import LinkedPriorityQueue
 from heap_priority_queue import HeapPriorityQueue
+from priority_queue import PriorityQueue
 
 
 def test_linked_pqueue():
@@ -11,8 +12,7 @@ def test_heap_pqueue():
     pass
 
 
-
-def __test(priority_queue):
+def __test(priority_queue: PriorityQueue):
     vals = [4, 5, 6, 7, 2, 1]
     prio = [0, 1, 2, 3, 4, 5] 
 

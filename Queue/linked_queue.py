@@ -1,9 +1,9 @@
-from typing import Generic, TypeVar, Optional
+from queue_interface import QueueInterface, T
+from typing import Generic, Optional
+from __future__ import annotations
 
-T = TypeVar('T')
 
-
-class LinkedQueue(Generic[T]):
+class LinkedQueue(QueueInterface):
 
     def __init__(self) -> None:
         self._initialize()
@@ -81,28 +81,31 @@ class LinkedQueue(Generic[T]):
 
 class Node(Generic[T]):
 
-    def __init__(self, value: T):
+    def __init__(self, value: T) -> None:
         self._value: T = value
         self._next: Optional[Node] = None
 
     @property
-    def value(self):
+    def value(self) -> T:
         return self._value
 
     @property
-    def next(self):
+    def next(self) -> Node:
         return self._next
     
     @value.setter
-    def value(self, value):
+    def value(self, value: T) -> None:
         self.value = value
 
     @next.setter
-    def next(self, next):
+    def next(self, next: Optional[Node]) -> None:
         self._next = next
         
         
         
 class EmptyQueueException(Exception):
-    def __init__(self) -> None:
-        super().__init__("Attempted to retrieve value from an empty queue")
+    def __init__(
+        self,
+        message="Attempted to retrieve value from an empty queue"
+    ) -> None:
+        super().__init__(message)

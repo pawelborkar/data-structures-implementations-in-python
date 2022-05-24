@@ -1,5 +1,6 @@
 from collections import deque
 from typing import Generic, TypeVar, List, Optional
+from __future__ import annotations
 
 T = TypeVar('T')
 
@@ -11,27 +12,27 @@ class Node(Generic[T]):
         self._right_child = right
 
     @property
-    def data(self):
+    def data(self) -> T:
         return self._data
 
     @property
-    def left_child(self):
+    def left_child(self) -> Optional[Node]:
         return self._left_child
 
     @property
-    def right_child(self):
+    def right_child(self) -> Optional[Node]:
         return self._right_child
 
     @data.setter
-    def data(self, data):
+    def data(self, data) -> None:
         self._data = data
 
     @left_child.setter
-    def left_child(self, left_child):
+    def left_child(self, left_child: Optional[Node]) -> None:
         self._left_child = left_child
 
     @right_child.setter
-    def right_child(self, right_child):
+    def right_child(self, right_child: Optional[Node]) -> None:
         self._right_child = right_child
 
 

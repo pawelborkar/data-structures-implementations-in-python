@@ -1,9 +1,7 @@
-from typing import Generic, TypeVar
+from priority_queue import PriorityQueue, T, P
+from typing import Generic
 
-T = TypeVar('T')
-P = TypeVar('P')
-
-class LinkedPriorityQueue(Generic[T, P]):
+class LinkedPriorityQueue(PriorityQueue):
 
     def __init__(self) -> None:
         self._initialize()
