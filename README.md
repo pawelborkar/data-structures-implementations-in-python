@@ -23,6 +23,7 @@ Data Structures implementations from scratch in Python
 ### Testing
 ![Testing](https://media.giphy.com/media/3orieKKmYyvUdR3RkY/giphy.gif)
 
-In order to test the implementations, `pytest` package is required
-Run command `pip install pytest` to install `pytest`
-In each folder, you will find a source file for the implementation, and another file to test it. Run `pytest <test-file-name>.py` to test the implementations
+In order to test the implementations, `pytest` package is required.
+Run command `pip install pytest` to install `pytest`.
+In each folder, you will find a source file for the implementation, and another file to test it. 
+Run `pytest <test-file-name>.py` to test the implementations.
