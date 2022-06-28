@@ -24,3 +24,9 @@ class PriorityQueue(Generic[T, P]):
     @property
     def size(self) -> int:
         raise NotImplementedError()
+
+    def __len__(self):
+        return self.size
+
+    def __bool__(self):
+        return not self.empty

@@ -1,32 +1,81 @@
-from typing import TypeVar, Generic
-import heapq
-from priority_queue import PriorityQueue, T
+from __future__ import annotations
 
-# CAN'T USE ON OBJECT
-class HeapPriorityQueue(PriorityQueue):
+from typing import List
+from priority_queue import T, P, PriorityQueue
 
-    def __init__(self) -> None:
-        self.reset()
 
-    
-    def is_empty(self) -> bool:
-        return self._size == 0
+class HPriorityQueue(PriorityQueue):
 
-    
-    def enqueue(self, item: T, priority: float) -> None:
-        self._size += 1
-        heapq.heappush(self.elements, (priority, item))
-    
+    def __init__(self, is_min: bool) -> None:
+        self._arr: List[self.PNode] = list()
+        self._is_min: bool = is_min
+
+    def enqueue(self, val: T, prio: P) -> None:
+        new_node = self.PNode(val, prio)
+        self._arr.append(new_node)
+
+        if self.size == 1:
+            return
+
+        size = self.size - 1
+        for i in range(size // 2 - 1, -1, -1):
+            self._heapify(i)
 
     def dequeue(self) -> T:
-        self._size -= 1
-        return heapq.heappop(self.elements)[1]
+        ret_val = self.peek()
+        return ret_val
 
+    def peek(self) -> T:
+        return self._arr[0].val
 
-    def get_size(self) -> int:
-        return self._size
+    def clear(self) -> T:
+        self._arr.clear()
 
+    @property
+    def size(self) -> int:
+        return len(self._arr)
 
-    def reset(self) -> None:
-        self._size = 0
-        self.elements: list[tuple[float, T]] = []
+    @property
+    def empty(self) -> bool:
+        return self.size == 0
+
+    def _heapify(self, idx: int) -> None:
+        target_idx = idx
+        lidx = idx * 2 + 1
+        ridx = idx * 2 + 2
+
+        lchild = self._arr[lidx]
+        rchild = self._arr[ridx]
+
+        if self._is_min:
+            if lchild < self._arr[target_idx]:
+                target_idx = lidx
+            if rchild < self._arr[target_idx]:
+                target_idx = ridx
+        else:
+            if lchild > self._arr[target_idx]:
+                target_idx = lidx
+            if rchild > self._arr[target_idx]:
+                target_idx = ridx
+        self._arr[idx], self._arr[target_idx] = self._arr[target_idx], self._arr[idx]
+
+    class PNode:
+
+        def __init__(self, val: T, priority: P) -> None:
+            self._val = val
+            self._priority = priority
+
+        @property
+        def priority(self) -> P:
+            return self._priority
+
+        @property
+        def val(self) -> T:
+            return self._val
+
+        def __lt__(self, other):
+            self.priority < other.priority
+
+        def __eq__(self, other):
+            self.priority < other.priority
+ 

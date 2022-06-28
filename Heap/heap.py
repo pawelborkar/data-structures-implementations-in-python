@@ -12,7 +12,7 @@ class Heap(Generic[T]):
     def insert(self, value: T) -> None:
         self._arr.append(value)
 
-        if self.is_empty():
+        if self.size == 1:
             return
 
         size = self.size - 1
