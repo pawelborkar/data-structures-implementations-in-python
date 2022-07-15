@@ -4,6 +4,11 @@ Data Structures implementations from scratch in Python
 
 ![from scratch](https://media.giphy.com/media/xUNd9YgROMj4gTQRR6/giphy.gif)
 
+### Why Am I Working on This?
+Well, because implementing your own data structure is actually really ... fun! I know that most of the time, we won't be using these self implemented data structures at our job. However, implementing them on my own really helps me understand how it works under the hood and what is the complexity for each data structure's operation. And also, I just can't resist implementing things on my own :D
+
+![I'm having fun](https://media.giphy.com/media/2u9rIEBoKMCpU6gNHY/giphy.gif)
+
 ### All Data Structures Covered So Far
 ![Done](https://media.giphy.com/media/8UF0EXzsc0Ckg/giphy.gif)
 * Linked List
